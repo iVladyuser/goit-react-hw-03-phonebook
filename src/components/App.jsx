@@ -2,15 +2,11 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 // import css from './App.module.css';
 
-
 import { ContactForm, ContactList, Filter } from 'components';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: 1, name: 'Hans Fischer', number: '0076 255–70–42' },
-      { id: 2, name: 'Alberto Schmid', number: '0079 913-75-94' },
-    ],
+    contacts: [],
     filter: '',
   };
   deleteContact = contactId => {
@@ -31,7 +27,6 @@ class App extends Component {
     const readyToAddContact = {
       ...newContact,
       id: nanoid(),
-      
     };
     console.log(newContact);
 
@@ -40,8 +35,8 @@ class App extends Component {
     }));
   };
 
-  changeFilter = e => {
-    this.setState({ filter: e.target.value });
+  changeFilter = value => {
+    this.setState({ value });
   };
 
   getFilteredContacts = () => {
@@ -52,13 +47,35 @@ class App extends Component {
     );
   };
 
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   render() {
     const { filter } = this.state;
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div style={{ display: "flex",flexDirection: "column", gap: "15px", margin: "0 auto", padding: "30px"}}>
-        <h1 style={{color: '#3645ab'}}>Phonebook</h1>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px',
+          margin: '0 auto',
+          padding: '30px',
+        }}
+      >
+        <h1 style={{ color: '#3645ab' }}>Phonebook</h1>
         <ContactForm onSubmit={this.handleAddContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
