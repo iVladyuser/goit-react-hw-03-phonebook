@@ -4,6 +4,11 @@ import { nanoid } from 'nanoid';
 
 import { ContactForm, ContactList, Filter } from 'components';
 
+const initialContacts = [
+    { id: 1, name: 'Silvia Weber', number: '0076 397–70–42' },
+    { id: 2, name: 'Alberto Meier', number: '0079 202-75-94' },
+  ];
+
 class App extends Component {
   state = {
     contacts: [],
@@ -12,7 +17,7 @@ class App extends Component {
 
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
+    const parsedContacts = JSON.parse(contacts) ?? initialContacts;
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
     }
