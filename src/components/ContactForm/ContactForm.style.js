@@ -10,10 +10,10 @@ export const Form = styled.form`
 `;
 
 export const FormLabel = styled.label`
-margin-top: 0;
-margin-bottom: 12px;
-font-weight: 500;
-font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 18px;
 `;
 
 export const FormInput = styled.input`
@@ -35,22 +35,18 @@ export const FormInput = styled.input`
   }
 `;
 
-
 export const FormButton = styled.button`
-    width: 100px;
+  width: 100px;
   height: 28px;
   margin-left: 5px;
   margin-top: 5px;
   border-width: inherit;
   border-radius: 5px;
   outline: none;
-    background-color: #3645ab;
-    color: white;
-    cursor: pointer;
-}
-
-.formButton:focus {
+  background-color: #3645ab;
+  color: white;
+  cursor: pointer;
+  &:focus {
     background-color: #2b3788;
-}`;
-
-
+  }
+`;
