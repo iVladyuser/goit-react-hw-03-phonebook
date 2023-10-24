@@ -5,9 +5,9 @@ import { nanoid } from 'nanoid';
 import { ContactForm, ContactList, Filter } from 'components';
 
 const initialContacts = [
-    { id: 1, name: 'Silvia Weber', number: '0076 397–70–42' },
-    { id: 2, name: 'Alberto Meier', number: '0079 202-75-94' },
-  ];
+  { id: 1, name: 'Silvia Weber', number: '0076 397–70–42' },
+  { id: 2, name: 'Alberto Meier', number: '0079 202-75-94' },
+];
 
 class App extends Component {
   state = {
@@ -28,7 +28,7 @@ class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
-  
+
   deleteContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
@@ -56,7 +56,7 @@ class App extends Component {
   };
 
   changeFilter = value => {
-    this.setState({ value });
+    this.setState({ filter: value });
   };
 
   getFilteredContacts = () => {
@@ -66,8 +66,6 @@ class App extends Component {
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
-
- 
 
   render() {
     const { filter } = this.state;
